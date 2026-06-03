@@ -1,0 +1,1 @@
+Everytime run tests for frontend like npm run build

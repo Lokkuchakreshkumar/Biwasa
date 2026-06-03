@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  biwasa:
+    build: .
+    container_name: biwasa_studio
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+      - PORT=5173
+    volumes:
+      # Mount the local configuration .env file
+      - ./.env:/app/.env
+      # Mount the generated manga images folder to persist output on the host laptop
+      - ./public/generated:/app/public/generated
+    restart: unless-stopped

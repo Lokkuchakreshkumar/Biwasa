@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+/* Base Body Styles - Stark Inked Warm Blueprint Grid */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #08080a; /* Deep Charcoal Obsidian */
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(245,242,235,0.015)' stroke-width='1'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 200 0 L 0 0 0 200' fill='none' stroke='rgba(245,242,235,0.035)' stroke-width='1.5'/%3E%3C/svg%3E");
+  color: #d1d1d6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Premium Typography Elements */
+h1, h2, h3, h4, h5, h6, .outfit {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.015em;
+}
+
+/* Noise Texture Overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Next-Gen Flat Editorial Panels */
+.glass-panel {
+  background: rgba(14, 14, 16, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(245, 242, 235, 0.06);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Sleek Inputs */
+.glass-input {
+  background: rgba(10, 10, 12, 0.9);
+  border: 1px solid rgba(245, 242, 235, 0.08);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #faf8f5;
+}
+
+.glass-input:focus {
+  background: rgba(14, 14, 16, 0.95);
+  border-color: #faf8f5; /* Warm Bone White */
+  box-shadow: 0 0 0 2px rgba(250, 248, 245, 0.15), inset 0 2px 4px rgba(0,0,0,0.5);
+  outline: none;
+}
+
+/* Card Styling (Editorial Feel - No Gradients) */
+.page-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+  background: rgba(16, 16, 20, 0.95);
+  border: 1px solid rgba(245, 242, 235, 0.05);
+}
+
+.page-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px #faf8f5;
+  border-color: #faf8f5;
+}
+
+.page-card .preview.empty {
+  background: rgba(20, 20, 24, 0.8);
+  border: 1px dashed rgba(245, 242, 235, 0.1);
+}
+
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 242, 235, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 242, 235, 0.25);
+}
+
+/* Status Indicators - Generic Environment Modules */
+.modules-badge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.modules-badge::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse-ring 2.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.4; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.modules-badge.checking {
+  background-color: #48484a;
+  box-shadow: 0 0 10px #48484a;
+}
+.modules-badge.checking::after { background-color: #48484a; }
+
+.modules-badge.available {
+  background-color: #faf8f5; /* Pure Bone White */
+  box-shadow: 0 0 10px #faf8f5;
+}
+.modules-badge.available::after { background-color: #faf8f5; }
+
+.modules-badge.unavailable {
+  background-color: #ff3b30; /* Vermillion Red Stamp */
+  box-shadow: 0 0 10px #ff3b30;
+}
+.modules-badge.unavailable::after { background-color: #ff3b30; }
+
+
+/* Sketch lines background loader overlay (Cross-hatch pencil pattern - Zero Gradients) */
+.sketch-lines-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 40 L 40 0 M 0 0 L 40 40' fill='none' stroke='rgba(245,242,235,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+  animation: sketchMoving 6s infinite linear;
+}
+
+@keyframes sketchMoving {
+  from { background-position: 0 0; }
+  to { background-position: 80px 80px; }
+}
+
+/* Print Overrides for PDF Export */
+@media print {
+  body { background: white !important; color: black !important; background-image: none !important; }
+  .noise-overlay { display: none !important; }
+  header, aside, button, form, .copy-prompt, .edit-prompt-btn, .image-url, .generate-page-image, #onboarding-banner, #progress-bar-wrap { display: none !important; }
+  main { overflow: visible !important; padding: 0 !important; margin: 0 !important; background: white !important; }
+  #pages-list { max-width: 100% !important; padding-bottom: 0 !important; space-y: 0 !important; }
+  .page-card { page-break-after: always; display: flex !important; flex-direction: row !important; border: 1px solid #ddd !important; background: white !important; box-shadow: none !important; margin-bottom: 2rem !important; color: black !important; transform: none !important; }
+  .page-card .page-story, .page-card .page-dialogues { color: #111 !important; }
+  .page-card .preview { border: none !important; background: transparent !important; }
+  .page-card .preview img { max-height: 500px !important; }
+}
