@@ -85,6 +85,20 @@ GROQ_API_KEY=gsk_your_groq_api_key_here
 CHROME_PROFILE=
 ```
 
+### 🔑 Initial ChatGPT Login
+
+Because BIWASA uses a headless browser to generate manga panels via ChatGPT Free, **you must have an active ChatGPT session**. You have two options for this initial login:
+
+**Option A: Inherit Your Host Browser Session (Recommended)**
+Log into [chatgpt.com](https://chatgpt.com) on your regular Google Chrome browser. Then, find your Chrome Profile Path (e.g., `~/.config/google-chrome/Default` on Linux, `%LOCALAPPDATA%\Google\Chrome\User Data\Default` on Windows, or `~/Library/Application Support/Google/Chrome/Default` on Mac) and set the `CHROME_PROFILE` variable in your `.env` file to that path. BIWASA will automatically inherit your existing session!
+
+**Option B: Manual Login to Isolated Profile**
+If you leave `CHROME_PROFILE` empty, BIWASA will create a local isolated profile folder (`scrapling_profile`). Since the scraper runs in the background (headless), you must perform a one-time manual login:
+1. Open `scrapling_chatgpt.py` and temporarily change `headless=True` to `headless=False` (around line 121).
+2. Run a test generation via the BIWASA Web UI. A browser window will pop up.
+3. Manually log into your ChatGPT account in that popup window.
+4. Once logged in, revert the code back to `headless=True`. Your session is now saved locally and will persist forever!
+
 ---
 
 ## 🎨 Creative Contribution Style Guidelines
