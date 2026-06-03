@@ -18,11 +18,14 @@ Designed with a stark, zero-gradient **Inked Editorial & Bone-White** visual aes
 
 ## 📥 Clone the Repository
 
-First, clone the project repository to your local machine:
+First, clone the project repository and create your local environment file:
 
 ```bash
 git clone https://github.com/Lokkuchakreshkumar/Biwasa.git
 cd mangaMaker
+
+# Create your local .env file so Docker doesn't mount it as a directory!
+cp .env.example .env
 ```
 
 ---
