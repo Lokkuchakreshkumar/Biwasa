@@ -24,37 +24,11 @@ First, clone the project repository and create your local environment file:
 git clone https://github.com/Lokkuchakreshkumar/Biwasa.git
 cd mangaMaker
 
-# Create your local .env file so Docker doesn't mount it as a directory!
+# Create your local environment configuration file
 cp .env.example .env
 ```
 
----
-
-## 🐳 Option 1: Setup via Docker (Quickest & Recommended)
-
-Docker containerizes the entire environment (Node.js web app, Python runner, and Playwright Chromium headless web driver system packages) in a single command, making it 100% independent of your host machine's browser versions.
-
-### 1. Prerequisites
-- [Docker](https://www.docker.com/) and Docker Compose installed.
-
-### 2. Launch the Application
-In your terminal, navigate to the root directory and spin up the services:
-```bash
-docker compose up --build
-```
-
-### 3. Open in Browser
-Navigate your browser to:
-```text
-http://localhost:5173
-```
-
-> [!TIP]
-> **Data Volume Persistence**: All drawn manga panels generated inside the Docker container appear instantly on your host laptop in the local [public/generated/](file:///app/public/generated) folder! This keeps your work persistent between container restarts.
-
----
-
-## 💻 Option 2: Setup via Manual (Non-Docker) Local Installation
+## 💻 Setup & Local Installation
 
 If you prefer to run the application directly on your local system, follow these precise step-by-step instructions.
 

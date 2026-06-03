@@ -107,7 +107,7 @@ async def scrape():
             print(f"[scrapling] Using Chrome profile: {args.chrome_profile}", file=sys.stderr)
             context = await pw.chromium.launch_persistent_context(
                 args.chrome_profile,
-                headless=False,
+                headless=True,
                 channel="chrome",
                 args=["--disable-blink-features=AutomationControlled"],
             )
@@ -118,7 +118,7 @@ async def scrape():
             print("[scrapling] Once you log in once, your session will be saved forever!", file=sys.stderr)
             context = await pw.chromium.launch_persistent_context(
                 profile_path,
-                headless=False,
+                headless=True,
                 args=["--disable-blink-features=AutomationControlled"],
             )
 
