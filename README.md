@@ -16,6 +16,17 @@ Designed with a stark, zero-gradient **Inked Editorial & Bone-White** visual aes
 
 ---
 
+## 📥 Clone the Repository
+
+First, clone the project repository to your local machine:
+
+```bash
+git clone https://github.com/Lokkuchakreshkumar/Biwasa.git
+cd mangaMaker
+```
+
+---
+
 ## 🐳 Option 1: Setup via Docker (Quickest & Recommended)
 
 Docker containerizes the entire environment (Node.js web app, Python runner, and Playwright Chromium headless web driver system packages) in a single command, making it 100% independent of your host machine's browser versions.
