@@ -191,7 +191,14 @@ async def scrape():
 
         # Submit
         print("[scrapling] Submitting prompt...", file=sys.stderr)
-        await page.keyboard.press("Enter")
+        try:
+            send_btn = page.locator('button[data-testid="send-button"]')
+            if await send_btn.is_visible(timeout=2000):
+                await send_btn.click()
+            else:
+                await page.keyboard.press("Enter")
+        except Exception:
+            await page.keyboard.press("Enter")
 
         print("[scrapling] Waiting for generation and rendering to complete (up to 180s)...", file=sys.stderr)
 
@@ -199,6 +206,17 @@ async def scrape():
         try:
             for _ in range(180):
                 new_img_handle = await page.evaluate_handle("""(existing) => {
+                    // Look for known generated image elements first
+                    const generatedImgs = Array.from(document.querySelectorAll('img[alt*="Generated image"], img[alt*="DALL·E"]'));
+                    for (const img of generatedImgs) {
+                        if (img.src && !img.src.startsWith('data:image/svg')) {
+                            if (!existing.includes(img.src)) {
+                                return img;
+                            }
+                        }
+                    }
+
+                    // Look for any new large images
                     const imgs = Array.from(document.querySelectorAll('img'));
                     for (const img of imgs) {
                         if (img.src && !img.src.includes('avatar') && !img.src.includes('logo') && !img.src.startsWith('data:image/svg')) {
@@ -210,6 +228,16 @@ async def scrape():
                             }
                         }
                     }
+                    
+                    // Fallback to large canvases
+                    const canvases = Array.from(document.querySelectorAll('canvas'));
+                    for (const canvas of canvases) {
+                        const rect = canvas.getBoundingClientRect();
+                        if (rect.width > 150 && rect.height > 150) {
+                            return canvas;
+                        }
+                    }
+                    
                     return null;
                 }""", existing_srcs)
                 
@@ -263,8 +291,9 @@ async def scrape():
         if target_img:
             print("[scrapling] Waiting for image pixels to finish loading...", file=sys.stderr)
             try:
+                # Canvases are already "loaded", so only wait for complete on imgs
                 await active_page.wait_for_function(
-                    """(imgEl) => imgEl.complete && imgEl.naturalWidth > 0""",
+                    """(el) => el.tagName.toLowerCase() === 'canvas' || (el.complete && el.naturalWidth > 0)""",
                     arg=target_img,
                     timeout=60000
                 )
@@ -339,6 +368,12 @@ async def scrape():
 
         # Capture the current conversation URL and save it for future runs!
         try:
+            # Wait up to 15s for URL to update to a /c/ chat URL if it's not already
+            for _ in range(15):
+                if "/c/" in active_page.url:
+                    break
+                await asyncio.sleep(1)
+
             current_url = active_page.url
             if "/c/" in current_url:
                 with open(active_chat_file, "w") as f:
